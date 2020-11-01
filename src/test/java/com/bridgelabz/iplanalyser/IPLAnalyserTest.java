@@ -29,23 +29,35 @@ public class IPLAnalyserTest {
         boolean message = iplAnalyser.printWelcomeMessage();
         Assert.assertTrue(message);
     }
+
     /*Test Case to check the number of entries in Batting data csv file*/
     @Test
     public void givenBattingDataCSVFile_ShouldLoadBattingData() throws IPLAnalyserException {
         int totalRecords = iplAnalyser.loadBattingData(BATTING_DATA_PATH);
         assertEquals(100, totalRecords);
     }
+
     /*Test Case to check the number of entries in Bowling data csv file*/
     @Test
     public void givenBowlingDataCSVFile_ShouldLoadBowlingData() throws IPLAnalyserException {
         int totalRecords = iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
         assertEquals(99, totalRecords);
     }
+
     /*Test Case to Sort the Batting Data by Average should return Highest Average*/
     @Test
     public void givenBattingData_WhenSortedByAvg_ShouldReturnHighestAvgFirst() throws IPLAnalyserException {
         iplAnalyser.loadBattingData(BATTING_DATA_PATH);
         List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedData(DataSorting.Order.AVG);
         assertEquals("83.2", sortedBattingList.get(0).getAvg());
+    }
+
+    /*Test Case to Sort the Batting Data by Strike Rate should return Highest Strike Rate*/
+    @Test
+    public void givenBattingData_WhenSortedBySR_ShouldReturnHighestSRFirst() throws IPLAnalyserException {
+        String sortedBattingData = "";
+        iplAnalyser.loadBattingData(BATTING_DATA_PATH);
+        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedData(DataSorting.Order.SR);
+        assertEquals("333.33", sortedBattingList.get(0).getStrikeRate());
     }
 }
