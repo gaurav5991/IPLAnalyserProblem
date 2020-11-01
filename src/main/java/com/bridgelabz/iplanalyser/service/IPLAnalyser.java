@@ -15,12 +15,12 @@ import java.util.List;
 public class IPLAnalyser {
     List battingList;
     List bowlingList;
-
+    /*Method to print Welcome Message*/
     public boolean printWelcomeMessage() {
         System.out.println("Welcome to IPL Analyser Problem");
         return true;
     }
-
+    /*Method to load batting data */
     public int loadBattingData(String battingDataPath) throws IPLAnaylserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(battingDataPath));) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
@@ -34,7 +34,7 @@ public class IPLAnalyser {
         }
         return battingList.size();
     }
-
+    /*Method to load bowling data */
     public int loadBowlingData(String bowlingDataPath) throws IPLAnaylserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(bowlingDataPath));) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
