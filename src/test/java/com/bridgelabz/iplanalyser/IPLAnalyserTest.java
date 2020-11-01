@@ -74,4 +74,11 @@ public class IPLAnalyserTest {
         List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.SR_AND_BOUNDARIES);
         assertEquals("Ishant Sharma", sortedBattingList.get(0).getPlayer());
     }
+    /*Test Case to Sort the Batting Data by Highest Strike Rate and best Average */
+    @Test
+    public void givenBattingData_WhenSortedByAvgAndStrikeRate_ShouldReturnSortedList() throws IPLAnalyserException {
+        iplAnalyser.loadBattingData(BATTING_DATA_PATH);
+        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.AVG_AND_SR);
+        assertEquals("MS Dhoni", sortedBattingList.get(0).getPlayer());
+    }
 }
