@@ -10,6 +10,7 @@ import com.bridgelabz.iplanalyser.model.BowlingPOJO;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 
 public class IPLAnalyser {
@@ -52,14 +53,24 @@ public class IPLAnalyser {
         return bowlingList.size();
     }
 
-    /*Generic Method to get Sorted List of Batting Data*/
+    /*Generic Method to get Sorted List of Data*/
     public <T> List<T> getSortedList(DataSorting.Order order, String playerType) throws IPLAnalyserException {
-        List<T> sortedList = null;
+        DataSorting sort = new DataSorting<>(order);
+        List<T> sortedList;
         if (playerType.equals("Batsman")) {
             if (battingList == null || battingList.size() == 0)
                 throw new IPLAnalyserException("No batting list data", IPLAnalyserException.ExceptionType.NO_DATA);
             sortedList = (List<T>) battingList;
         }
+        else if(playerType.equals("Bowler")) {
+            if (bowlingList == null || bowlingList.size() == 0)
+                throw new IPLAnalyserException("No bowling list data", IPLAnalyserException.ExceptionType.NO_DATA);
+            sortedList = (List<T>) bowlingList;
+        }
+        else
+            throw new IPLAnalyserException("Wrong player type",IPLAnalyserException.ExceptionType.WRONG_PLAYER_TYPE);
+        Collections.sort(sortedList, sort);
+        System.out.println(sortedList);
         return sortedList;
     }
 }
