@@ -109,7 +109,6 @@ public class IPLAnalyserTest {
     /*Test Case to Sort the Bowling Data by Best Economy of Bowlers */
     @Test
     public void givenBowlingData_WhenSortedByEconomy_ShouldReturnBestEconomyBowlerFirst() throws IPLAnalyserException {
-        iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
         sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.ECONOMY, "Bowler");
         assertEquals("4.8", sortedBowlingList.get(0).getEconomy());
     }
@@ -117,7 +116,6 @@ public class IPLAnalyserTest {
     /*Test Case to Sort the Bowling Data by Best Bowling Strike Rate and 5W or 4W haul of Bowlers */
     @Test
     public void givenBowlingData_WhenSortedByStrikeRateandWicketHauls_ShouldReturnBestSortedList() throws IPLAnalyserException {
-        iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
         sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.BOWL_SR_AND_WICKET_HAULS, "Bowler");
         assertEquals("8.66", sortedBowlingList.get(0).getStrikeRate());
     }
@@ -125,8 +123,14 @@ public class IPLAnalyserTest {
     /*Test Case to Sort the Bowling Data by Best Average and Strike Rate of Bowlers */
     @Test
     public void givenBowlingData_WhenSortedByAverageandStrikeRate_ShouldReturnBestSortedList() throws IPLAnalyserException {
-        iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
         sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.BOWL_AVG_AND_SR, "Bowler");
         assertEquals("11", sortedBowlingList.get(0).getAvg());
+    }
+
+    /*Test Case to Sort the Bowling Data by wickets and average of Bowlers */
+    @Test
+    public void givenBowlingData_WhenSortedByWicketsAndAverage_ShouldReturnBestSortedList() throws IPLAnalyserException {
+        sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.BOWL_WKTS_AND_AVG, "Bowler");
+        assertEquals("26", sortedBowlingList.get(0).getWickets());
     }
 }
