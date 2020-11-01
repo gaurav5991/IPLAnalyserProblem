@@ -113,4 +113,11 @@ public class IPLAnalyserTest {
         sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.ECONOMY, "Bowler");
         assertEquals("4.8", sortedBowlingList.get(0).getEconomy());
     }
+    /*Test Case to Sort the Bowling Data by Best Bowling Strike Rate and 5W or 4W haul of Bowlers */
+    @Test
+    public void givenBowlingData_WhenSortedBySRandWicketHauls_ShouldReturnBestSortedList() throws IPLAnalyserException {
+        iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
+        sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.BOWL_SR_AND_WICKET_HAULS,"Bowler");
+        assertEquals("8.66", sortedBowlingList.get(0).getStrikeRate());
+    }
 }

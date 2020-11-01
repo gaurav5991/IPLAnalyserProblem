@@ -35,7 +35,7 @@ public class BowlingPOJO {
         return "Bowling [pos=" + pos + ", player=" + player + ", matches=" + matches + ", innings=" + innings
                 + ", overs=" + overs + ", runs=" + runs + ", wickets=" + wickets + ", bbi=" + bbi + ", avg=" + avg
                 + ", economy=" + economy + ", strikeRate=" + strikeRate + ", fourWickets=" + fourWickets
-                + ", fiveWickets=" + fiveWickets + "]";
+                + ", fiveWickets=" + fiveWickets + "]"+"\n";
     }
 
     public String getPos() {
