@@ -1,11 +1,12 @@
 package com.bridgelabz.iplanalyser.service;
 
 import com.bridgelabz.iplanalyser.model.BattingPOJO;
+import com.bridgelabz.iplanalyser.model.BowlingPOJO;
 
 import java.util.Comparator;
 
-public class DataSorting implements Comparator<BattingPOJO> {
-    public enum Order{AVG,SR,BOUNDARIES,SR_AND_BOUNDARIES,AVG_AND_SR,RUNS_AND_AVG}
+public class DataSorting<T> implements Comparator<T> {
+    public enum Order{BAT_AVG,BAT_SR,BOUNDARIES,SR_AND_BOUNDARIES,AVG_AND_SR,RUNS_AND_AVG}
 
     public Order sortingBy;
 
@@ -13,43 +14,48 @@ public class DataSorting implements Comparator<BattingPOJO> {
         this.sortingBy = sortingBy;
     }
     @Override
-    public int compare(BattingPOJO b1,BattingPOJO b2) {
+    public int compare(T Object1,T Object2) {
+        BattingPOJO bat1 = null,bat2 = null;
+        if(Object1.getClass().equals(BattingPOJO.class)) {
+            bat1= (BattingPOJO) Object1;
+            bat2= (BattingPOJO) Object2;
+        }
         switch(sortingBy) {
-            case AVG:
-                if(b1.getAvg().contains("-"))
-                    b1.setAvg("0");
-                return (int) (Double.parseDouble(b2.getAvg())-Double.parseDouble((b1.getAvg())));
-            case SR:
-                if(b1.getStrikeRate().contains("-"))
-                    b1.setStrikeRate("0");
-                return (int) (Double.parseDouble(b2.getStrikeRate())-Double.parseDouble((b1.getStrikeRate())));
+            case BAT_AVG:
+                if(bat1.getAvg().contains("-"))
+                    bat1.setAvg("0");
+                return (int) (Double.parseDouble(bat2.getAvg())-Double.parseDouble((bat1.getAvg())));
+            case BAT_SR:
+                if(bat1.getStrikeRate().contains("-"))
+                    bat1.setStrikeRate("0");
+                return (int) (Double.parseDouble(bat2.getStrikeRate())-Double.parseDouble((bat1.getStrikeRate())));
             case BOUNDARIES:
-                return (Integer.parseInt(b2.getFours())+Integer.parseInt(b2.getSixes()))
-                        -(Integer.parseInt(b1.getFours())+Integer.parseInt(b1.getSixes()));
+                return (Integer.parseInt(bat2.getFours())+Integer.parseInt(bat2.getSixes()))
+                        -(Integer.parseInt(bat1.getFours())+Integer.parseInt(bat1.getSixes()));
             case SR_AND_BOUNDARIES:
-                if (b1.getStrikeRate().contains("-"))
-                    b1.setStrikeRate("0");
-                double value = Double.parseDouble(b2.getStrikeRate()) - Double.parseDouble((b1.getStrikeRate()));
+                if (bat1.getStrikeRate().contains("-"))
+                    bat1.setStrikeRate("0");
+                double value = Double.parseDouble(bat2.getStrikeRate()) - Double.parseDouble((bat1.getStrikeRate()));
                 if (value == 0) {
-                    return (Integer.parseInt(b2.getFours()) + Integer.parseInt(b2.getSixes()))
-                            - (Integer.parseInt(b1.getFours()) + Integer.parseInt(b1.getSixes()));
+                    return (Integer.parseInt(bat2.getFours()) + Integer.parseInt(bat2.getSixes()))
+                            - (Integer.parseInt(bat1.getFours()) + Integer.parseInt(bat1.getSixes()));
                 }
                 value = setValue(value);
                 return (int) value;
             case AVG_AND_SR:
-                if (b1.getAvg().contains("-"))
-                    b1.setAvg("0");
-                value = (Double.parseDouble(b2.getAvg()) - Double.parseDouble((b1.getAvg())));
+                if (bat1.getAvg().contains("-"))
+                    bat1.setAvg("0");
+                value = (Double.parseDouble(bat2.getAvg()) - Double.parseDouble((bat1.getAvg())));
                 if (value == 0)
-                    return (int) (Double.parseDouble(b2.getStrikeRate()) - Double.parseDouble((b1.getStrikeRate())));
+                    return (int) (Double.parseDouble(bat2.getStrikeRate()) - Double.parseDouble((bat1.getStrikeRate())));
                 value = setValue(value);
                 return (int) value;
             case RUNS_AND_AVG:
-                if(b1.getAvg().contains("-"))
-                    b1.setAvg("0");
-                value = Integer.parseInt(b2.getRuns()) - Integer.parseInt(b1.getRuns());
+                if(bat1.getAvg().contains("-"))
+                    bat1.setAvg("0");
+                value = Integer.parseInt(bat2.getRuns()) - Integer.parseInt(bat1.getRuns());
                 if (value == 0) {
-                    return (int) (Double.parseDouble(b2.getAvg()) - Double.parseDouble((b1.getAvg())));
+                    return (int) (Double.parseDouble(bat2.getAvg()) - Double.parseDouble((bat1.getAvg())));
                 }
                 value = setValue(value);
                 return (int) value;
