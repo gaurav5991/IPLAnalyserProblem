@@ -37,7 +37,7 @@ public class BattingPOJO {
         return "Batting [pos=" + pos + ", player=" + player + ", matches=" + matches + ", innings=" + innings
                 + ", notOuts=" + notOuts + ", runs=" + runs + ", highestScore=" + highestScore + ", avg=" + avg
                 + ", ballsFaced=" + ballsFaced + ", strikeRate=" + strikeRate + ", hundreds=" + hundreds + ", fifties="
-                + fifties + ", fours=" + fours + ", sixes=" + sixes + "]";
+                + fifties + ", fours=" + fours + ", sixes=" + sixes + "]"+"\n";
     }
 
     public String getPos() {

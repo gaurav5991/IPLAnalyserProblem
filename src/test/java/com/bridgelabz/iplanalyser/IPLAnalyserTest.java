@@ -59,4 +59,12 @@ public class IPLAnalyserTest {
         List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.SR);
         assertEquals("333.33", sortedBattingList.get(0).getStrikeRate());
     }
+    /*Test Case to Sort the Batting Data by Maximum Fours and Sixes*/
+    @Test
+    public void givenBattingData_WhenSortedByBoundaries_ShouldReturnHighestTotalBoundaries() throws IPLAnalyserException {
+        iplAnalyser.loadBattingData(BATTING_DATA_PATH);
+        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.BOUNDARIES);
+        int totalBoundaries = Integer.parseInt(sortedBattingList.get(0).getFours())+Integer.parseInt(sortedBattingList.get(0).getSixes());
+        assertEquals(83, totalBoundaries);
+    }
 }

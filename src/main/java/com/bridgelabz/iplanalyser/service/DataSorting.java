@@ -5,7 +5,7 @@ import com.bridgelabz.iplanalyser.model.BattingPOJO;
 import java.util.Comparator;
 
 public class DataSorting implements Comparator<BattingPOJO> {
-    public enum Order{AVG,SR}
+    public enum Order{AVG,SR,BOUNDARIES}
 
     public Order sortingBy;
 
@@ -23,6 +23,9 @@ public class DataSorting implements Comparator<BattingPOJO> {
                 if(b1.getStrikeRate().contains("-"))
                     b1.setStrikeRate("0");
                 return (int) (Double.parseDouble(b2.getStrikeRate())-Double.parseDouble((b1.getStrikeRate())));
+            case BOUNDARIES:
+                return (Integer.parseInt(b2.getFours())+Integer.parseInt(b2.getSixes()))
+                        -(Integer.parseInt(b1.getFours())+Integer.parseInt(b1.getSixes()));
         }
         return 0;
     }
