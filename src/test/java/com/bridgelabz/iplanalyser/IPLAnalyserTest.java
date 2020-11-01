@@ -59,14 +59,16 @@ public class IPLAnalyserTest {
         List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.SR);
         assertEquals("333.33", sortedBattingList.get(0).getStrikeRate());
     }
+
     /*Test Case to Sort the Batting Data by Maximum Fours and Sixes*/
     @Test
     public void givenBattingData_WhenSortedByBoundaries_ShouldReturnHighestTotalBoundaries() throws IPLAnalyserException {
         iplAnalyser.loadBattingData(BATTING_DATA_PATH);
         List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.BOUNDARIES);
-        int totalBoundaries = Integer.parseInt(sortedBattingList.get(0).getFours())+Integer.parseInt(sortedBattingList.get(0).getSixes());
+        int totalBoundaries = Integer.parseInt(sortedBattingList.get(0).getFours()) + Integer.parseInt(sortedBattingList.get(0).getSixes());
         assertEquals(83, totalBoundaries);
     }
+
     /*Test Case to Sort the Batting Data by Highest Strike Rate with Boundaries*/
     @Test
     public void givenBattingData_WhenSortedByStrikeRateAndBoundaries_ShouldReturnProperList() throws IPLAnalyserException {
@@ -74,11 +76,20 @@ public class IPLAnalyserTest {
         List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.SR_AND_BOUNDARIES);
         assertEquals("Ishant Sharma", sortedBattingList.get(0).getPlayer());
     }
+
     /*Test Case to Sort the Batting Data by Highest Strike Rate and best Average */
     @Test
     public void givenBattingData_WhenSortedByAvgAndStrikeRate_ShouldReturnSortedList() throws IPLAnalyserException {
         iplAnalyser.loadBattingData(BATTING_DATA_PATH);
         List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.AVG_AND_SR);
         assertEquals("MS Dhoni", sortedBattingList.get(0).getPlayer());
+    }
+
+    /*Test Case to Sort the Batting Data by maximum runs with highest average */
+    @Test
+    public void givenBattingData_WhenSortedByRunsAndAvg_ShouldReturnSortedList() throws IPLAnalyserException {
+        iplAnalyser.loadBattingData(BATTING_DATA_PATH);
+        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.RUNS_AND_AVG);
+        assertEquals("David Warner", sortedBattingList.get(0).getPlayer());
     }
 }
