@@ -168,6 +168,6 @@ public class IPLAnalyserTest {
     public void givenBattingData_ShouldReturnCricketersWithNoHundredAndFifty_WithBestBattingAvg() throws IPLAnalyserException {
         iplAnalyser.loadData(BATTING_DATA_PATH, "Batting");
         sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.ZERO_100AND50_BEST_AVG, "Batsman");
-        assertEquals("MS Dhoni", sortedBattingList.get(0).getPlayer());
+        assertEquals("Marcus Stoinis", sortedBattingList.get(0).getPlayer());
     }
 }
