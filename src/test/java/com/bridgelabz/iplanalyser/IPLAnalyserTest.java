@@ -98,4 +98,10 @@ public class IPLAnalyserTest {
         sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.BOWL_AVG, "Bowler");
         assertEquals("11", sortedBowlingList.get(0).getAvg());
     }
+    /*Test Case to Sort the Bowling Data by Best Strike of Bowlers */
+    @Test
+    public void givenBowlingData_WhenSortedByStrikeRate_ShouldReturnBestStrikeRateFirst() throws IPLAnalyserException {
+        sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.BOWL_SR,"Bowler");
+        assertEquals("8.66", sortedBowlingList.get(0).getStrikeRate());
+    }
 }
