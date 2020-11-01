@@ -2,11 +2,12 @@ package com.bridgelabz.iplanalyser.service;
 
 import com.bridgelabz.iplanalyser.model.BattingPOJO;
 import com.bridgelabz.iplanalyser.model.BowlingPOJO;
+import com.mysql.cj.protocol.x.OkBuilder;
 
 import java.util.Comparator;
 
 public class DataSorting<T> implements Comparator<T> {
-    public enum Order{BAT_AVG,BAT_SR,BOUNDARIES,SR_AND_BOUNDARIES,AVG_AND_SR,RUNS_AND_AVG}
+    public enum Order{BAT_AVG,BAT_SR,BOUNDARIES,SR_AND_BOUNDARIES,AVG_AND_SR,RUNS_AND_AVG,BOWL_AVG}
 
     public Order sortingBy;
 
@@ -16,9 +17,13 @@ public class DataSorting<T> implements Comparator<T> {
     @Override
     public int compare(T Object1,T Object2) {
         BattingPOJO bat1 = null,bat2 = null;
+        BowlingPOJO bowl1 = null,bowl2 = null;
         if(Object1.getClass().equals(BattingPOJO.class)) {
             bat1= (BattingPOJO) Object1;
             bat2= (BattingPOJO) Object2;
+        }else if(Object1.getClass().equals(BowlingPOJO.class)) {
+            bowl1= (BowlingPOJO) Object1;
+            bowl2= (BowlingPOJO)Object2;
         }
         switch(sortingBy) {
             case BAT_AVG:
@@ -59,6 +64,10 @@ public class DataSorting<T> implements Comparator<T> {
                 }
                 value = setValue(value);
                 return (int) value;
+            case BOWL_AVG:
+                if(bowl1.getAvg().contains("-"))
+                    bowl1.setAvg("999999");
+                return (int) (Double.parseDouble(bowl1.getAvg()) - Double.parseDouble((bowl2.getAvg())));
         }
         return 0;
     }

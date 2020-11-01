@@ -1,6 +1,7 @@
 package com.bridgelabz.iplanalyser;
 
 import com.bridgelabz.iplanalyser.model.BattingPOJO;
+import com.bridgelabz.iplanalyser.model.BowlingPOJO;
 import com.bridgelabz.iplanalyser.service.DataSorting;
 import com.bridgelabz.iplanalyser.service.IPLAnalyser;
 import com.bridgelabz.iplanalyser.Exception.IPLAnalyserException;
@@ -17,9 +18,10 @@ public class IPLAnalyserTest {
     private static final String BOWLING_DATA_PATH = "C:\\Users\\User\\IdeaProjects\\IPLAnalyserProblem\\src\\test\\resources\\IPL2019FactsheetMostWkts.csv";
     private IPLAnalyser iplAnalyser;
     List<BattingPOJO> sortedBattingList;
+    List<BowlingPOJO> sortedBowlingList;
 
     @Before
-    public void init() throws IPLAnalyserException{
+    public void init() throws IPLAnalyserException {
         iplAnalyser = new IPLAnalyser();
         iplAnalyser.loadBattingData(BATTING_DATA_PATH);
         iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
@@ -50,21 +52,21 @@ public class IPLAnalyserTest {
     /*Test Case to Sort the Batting Data by Average should return Highest Average*/
     @Test
     public void givenBattingData_WhenSortedByAvg_ShouldReturnHighestAvgFirst() throws IPLAnalyserException {
-        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.BAT_AVG,"Batsman");
+        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.BAT_AVG, "Batsman");
         assertEquals("83.2", sortedBattingList.get(0).getAvg());
     }
 
     /*Test Case to Sort the Batting Data by Strike Rate should return Highest Strike Rate*/
     @Test
     public void givenBattingData_WhenSortedBySR_ShouldReturnHighestSRFirst() throws IPLAnalyserException {
-        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.BAT_SR,"Batsman");
+        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.BAT_SR, "Batsman");
         assertEquals("333.33", sortedBattingList.get(0).getStrikeRate());
     }
 
     /*Test Case to Sort the Batting Data by Maximum Fours and Sixes*/
     @Test
     public void givenBattingData_WhenSortedByBoundaries_ShouldReturnHighestTotalBoundaries() throws IPLAnalyserException {
-        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.BOUNDARIES,"Batsman");
+        sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.BOUNDARIES, "Batsman");
         int totalBoundaries = Integer.parseInt(sortedBattingList.get(0).getFours()) + Integer.parseInt(sortedBattingList.get(0).getSixes());
         assertEquals(83, totalBoundaries);
     }
@@ -72,21 +74,28 @@ public class IPLAnalyserTest {
     /*Test Case to Sort the Batting Data by Highest Strike Rate with Boundaries*/
     @Test
     public void givenBattingData_WhenSortedByStrikeRateAndBoundaries_ShouldReturnProperList() throws IPLAnalyserException {
-        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.SR_AND_BOUNDARIES,"Batsman");
+        sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.SR_AND_BOUNDARIES, "Batsman");
         assertEquals("Ishant Sharma", sortedBattingList.get(0).getPlayer());
     }
 
     /*Test Case to Sort the Batting Data by Highest Strike Rate and best Average */
     @Test
     public void givenBattingData_WhenSortedByAvgAndStrikeRate_ShouldReturnSortedList() throws IPLAnalyserException {
-        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.AVG_AND_SR,"Batsman");
+        sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.AVG_AND_SR, "Batsman");
         assertEquals("MS Dhoni", sortedBattingList.get(0).getPlayer());
     }
 
     /*Test Case to Sort the Batting Data by maximum runs with highest average */
     @Test
     public void givenBattingData_WhenSortedByRunsAndAvg_ShouldReturnSortedList() throws IPLAnalyserException {
-        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.RUNS_AND_AVG,"Batsman");
+        sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.RUNS_AND_AVG, "Batsman");
         assertEquals("David Warner", sortedBattingList.get(0).getPlayer());
+    }
+
+    /*Test Case to Sort the Bowling Data by average should return best Average */
+    @Test
+    public void givenBowlingData_WhenSortedByAvg_ShouldReturnBestAvgFirst() throws IPLAnalyserException {
+        sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.BOWL_AVG, "Bowler");
+        assertEquals("11", sortedBowlingList.get(0).getAvg());
     }
 }
