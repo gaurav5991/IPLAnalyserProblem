@@ -121,7 +121,7 @@ public class DataSorting<T> implements Comparator<T> {
                 }
                 return (int)value;
             case ZERO_100AND50_BEST_AVG:
-                if ((bat1).getAvg().contains("-"))
+                if (bat1.getAvg().contains("-"))
                     bat1.setAvg("0");
                 return (int) setValue(Double.parseDouble(bat2.getAvg()) - Double.parseDouble((bat1.getAvg())));
         }
