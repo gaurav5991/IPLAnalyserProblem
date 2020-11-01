@@ -149,5 +149,11 @@ public class IPLAnalyserTest {
         sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.MAX100_AND_BAT_AVG, "Batsman");
         assertEquals("David Warner", sortedBattingList.get(0).getPlayer());
     }
-
+    /*Test Case to check Zero hundreds and fifties but with best Batting Average */
+    @Test
+    public void givenBattingData_ShouldReturnCricketersWithNoHundredAndFifty_WithBestBattingAvg() throws IPLAnalyserException {
+        iplAnalyser.loadBattingData(BATTING_DATA_PATH);
+        sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.ZERO_100AND50_BEST_AVG, "Batsman");
+        assertEquals("MS Dhoni",sortedBattingList.get(0).getPlayer());
+    }
 }
