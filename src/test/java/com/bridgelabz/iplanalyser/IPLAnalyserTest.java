@@ -98,10 +98,19 @@ public class IPLAnalyserTest {
         sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.BOWL_AVG, "Bowler");
         assertEquals("11", sortedBowlingList.get(0).getAvg());
     }
+
     /*Test Case to Sort the Bowling Data by Best Strike of Bowlers */
     @Test
     public void givenBowlingData_WhenSortedByStrikeRate_ShouldReturnBestStrikeRateFirst() throws IPLAnalyserException {
-        sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.BOWL_SR,"Bowler");
+        sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.BOWL_SR, "Bowler");
         assertEquals("8.66", sortedBowlingList.get(0).getStrikeRate());
+    }
+
+    /*Test Case to Sort the Bowling Data by Best Economy of Bowlers */
+    @Test
+    public void givenBowlingData_WhenSortedByEconomy_ShouldReturnBestEconomyBowlerFirst() throws IPLAnalyserException {
+        iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
+        sortedBowlingList = iplAnalyser.getSortedList(DataSorting.Order.ECONOMY, "Bowler");
+        assertEquals("4.8", sortedBowlingList.get(0).getEconomy());
     }
 }
