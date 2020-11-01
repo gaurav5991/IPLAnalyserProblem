@@ -67,4 +67,11 @@ public class IPLAnalyserTest {
         int totalBoundaries = Integer.parseInt(sortedBattingList.get(0).getFours())+Integer.parseInt(sortedBattingList.get(0).getSixes());
         assertEquals(83, totalBoundaries);
     }
+    /*Test Case to Sort the Batting Data by Highest Strike Rate with Boundaries*/
+    @Test
+    public void givenBattingData_WhenSortedByStrikeRateAndBoundaries_ShouldReturnProperList() throws IPLAnalyserException {
+        iplAnalyser.loadBattingData(BATTING_DATA_PATH);
+        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.SR_AND_BOUNDARIES);
+        assertEquals("Ishant Sharma", sortedBattingList.get(0).getPlayer());
+    }
 }
