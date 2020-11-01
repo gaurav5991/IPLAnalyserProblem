@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.bridgelabz.iplanalyser.IPLAnalyserTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-11-01T10:52:59" hostname="DESKTOP-5KJH2JU" time="0.407">
+  <properties/>
+  <testcase name="givenWelcomeMessageShouldReturnTrue" classname="com.bridgelabz.iplanalyser.IPLAnalyserTest" time="0.003"/>
+  <testcase name="givenBowlingDataCSVFile_ShouldLoadBowlingData" classname="com.bridgelabz.iplanalyser.IPLAnalyserTest" time="0.273"/>
+  <testcase name="givenBattingDataCSVFile_ShouldLoadBattingData" classname="com.bridgelabz.iplanalyser.IPLAnalyserTest" time="0.13"/>
+  <system-out><![CDATA[Welcome to IPL Analyser Problem
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
