@@ -16,11 +16,13 @@ import java.util.List;
 public class IPLAnalyser {
     List battingList;
     List bowlingList;
+
     /*Method to print Welcome Message*/
     public boolean printWelcomeMessage() {
         System.out.println("Welcome to IPL Analyser Problem");
         return true;
     }
+
     /*Method to load batting data */
     public int loadBattingData(String battingDataPath) throws IPLAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(battingDataPath));) {
@@ -35,6 +37,7 @@ public class IPLAnalyser {
         }
         return battingList.size();
     }
+
     /*Method to load bowling data */
     public int loadBowlingData(String bowlingDataPath) throws IPLAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(bowlingDataPath));) {
@@ -50,8 +53,9 @@ public class IPLAnalyser {
         return bowlingList.size();
     }
 
-    public List<BattingPOJO> getSortedData(DataSorting.Order order) throws IPLAnalyserException {
-        if(battingList==null||battingList.size()==0) {
+    /*Method to get Sorted List of Batting Data*/
+    public List<BattingPOJO> getSortedList(DataSorting.Order order) throws IPLAnalyserException {
+        if (battingList == null || battingList.size() == 0) {
             throw new IPLAnalyserException("No batting list data", IPLAnalyserException.ExceptionType.NO_DATA);
         }
         DataSorting dataSorting = new DataSorting(order);

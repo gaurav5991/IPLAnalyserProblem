@@ -48,16 +48,15 @@ public class IPLAnalyserTest {
     @Test
     public void givenBattingData_WhenSortedByAvg_ShouldReturnHighestAvgFirst() throws IPLAnalyserException {
         iplAnalyser.loadBattingData(BATTING_DATA_PATH);
-        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedData(DataSorting.Order.AVG);
+        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.AVG);
         assertEquals("83.2", sortedBattingList.get(0).getAvg());
     }
 
     /*Test Case to Sort the Batting Data by Strike Rate should return Highest Strike Rate*/
     @Test
     public void givenBattingData_WhenSortedBySR_ShouldReturnHighestSRFirst() throws IPLAnalyserException {
-        String sortedBattingData = "";
         iplAnalyser.loadBattingData(BATTING_DATA_PATH);
-        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedData(DataSorting.Order.SR);
+        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedList(DataSorting.Order.SR);
         assertEquals("333.33", sortedBattingList.get(0).getStrikeRate());
     }
 }
