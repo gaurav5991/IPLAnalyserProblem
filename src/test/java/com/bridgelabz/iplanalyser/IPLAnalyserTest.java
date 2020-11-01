@@ -1,11 +1,14 @@
 package com.bridgelabz.iplanalyser;
 
+import com.bridgelabz.iplanalyser.model.BattingPOJO;
+import com.bridgelabz.iplanalyser.service.DataSorting;
 import com.bridgelabz.iplanalyser.service.IPLAnalyser;
-import com.bridgelabz.iplanalyser.Exception.IPLAnaylserException;
-import com.google.gson.Gson;
+import com.bridgelabz.iplanalyser.Exception.IPLAnalyserException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -28,23 +31,21 @@ public class IPLAnalyserTest {
     }
     /*Test Case to check the number of entries in Batting data csv file*/
     @Test
-    public void givenBattingDataCSVFile_ShouldLoadBattingData() throws IPLAnaylserException {
+    public void givenBattingDataCSVFile_ShouldLoadBattingData() throws IPLAnalyserException {
         int totalRecords = iplAnalyser.loadBattingData(BATTING_DATA_PATH);
         assertEquals(100, totalRecords);
     }
     /*Test Case to check the number of entries in Bowling data csv file*/
     @Test
-    public void givenBowlingDataCSVFile_ShouldLoadBowlingData() throws IPLAnaylserException {
+    public void givenBowlingDataCSVFile_ShouldLoadBowlingData() throws IPLAnalyserException {
         int totalRecords = iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
         assertEquals(99, totalRecords);
     }
     /*Test Case to Sort the Batting Data by Average should return Highest Average*/
     @Test
-    public void givenBattingData_WhenSortedByAvg_ShouldReturnHighestAvgFirst() throws IPLAnaylserException {
-        String sortedBattingData = "";
+    public void givenBattingData_WhenSortedByAvg_ShouldReturnHighestAvgFirst() throws IPLAnalyserException {
         iplAnalyser.loadBattingData(BATTING_DATA_PATH);
-        sortedBattingData = iplAnalyser.battingAvgWiseSortedData();
-        Double[] battingData = new Gson().fromJson(sortedBattingData, Double[].class);
-        assertEquals(83.2, battingData[0].doubleValue(),0.0);
+        List<BattingPOJO> sortedBattingList = iplAnalyser.getSortedData(DataSorting.Order.AVG);
+        assertEquals("83.2", sortedBattingList.get(0).getAvg());
     }
 }
